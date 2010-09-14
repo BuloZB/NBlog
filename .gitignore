@@ -1,0 +1,7 @@
+nbproject
+perm.sh
+libs/Nette/*
+libs/Doctrine/*
+var/proxies/*
+var/sessions/*
+var/temp/*

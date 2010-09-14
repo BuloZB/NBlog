@@ -1,0 +1,25 @@
+{block #content}
+
+<div id="posts">
+	{foreach $posts as $post}
+
+		<div class="post">
+			<h2 class="entry-title"><a href="{plink Default:post 'slug'=>$post->getSlug()}">{$post->getHeadline()}</a></h2>
+			<p class="entry-date">{$post->getCreated()->format('M j, Y')}</p>
+			<p class="comments-link"><a href="{plink Default:post 'slug'=>$post->getSlug()}#comments" title="comments">{=count($post->getComments())}</a></p>
+
+			<div class="entry-content">
+				{!$post->getText()}
+			</div><!-- .entry-content -->
+
+			<p class="tag-links">
+				<span>tags: </span>
+				{foreach $post->getTags() as $tag}
+					<a href="{plink Default:tag 'tag'=>$tag->getName()}">{$tag->getName()}</a>
+					{if !$iterator->isLast()}|{/if}
+				{/foreach}
+			</p>
+		</div><!-- .post -->
+
+	{/foreach}
+</div><!-- #posts -->

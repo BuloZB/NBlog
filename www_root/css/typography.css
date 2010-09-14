@@ -1,0 +1,137 @@
+body
+{ font:13px/1.231 sans-serif; *font-size:small; } /* hack retained to preserve specificity */
+
+select, input, textarea, button
+{ font:99% sans-serif; }
+
+pre, code, kbd, samp
+{ font-family:monospace, sans-serif; }
+
+
+/*
+ * BASE STYLES
+ */
+
+html
+{ overflow-y:scroll; } /* always force a scrollbar in non-IE */
+
+body, select, input, textarea
+{ color:#444; font-family:sans-serif; }
+
+h1,h2,h3,h4,h5,h6
+{ font-weight:bold; margin:0 0 1em; }
+
+h2.section
+{ font-size:250%; margin:1em 0 1.5em; text-align:center; }
+
+p
+{ margin:0 0 1.231em; }
+
+a, a:active, a:visited	{ color: #607890; }
+a:link					{ -webkit-tap-highlight-color:#ff5e99; }
+a:hover, a:active		{ outline: none; }
+a:hover					{ color: #036; }
+a:focus					{ background-color:#607890; color:#eaeaea; }
+a[href^="error:"]		{ background:red; color:white; }
+
+ul, ol
+{ margin:0 0 1.8em 1.8em; }
+
+ol
+{ list-style-type:decimal; }
+
+small
+{ font-size:85%; }
+
+strong, th
+{ font-weight:bold; }
+
+td, td img
+{ vertical-align:top; }
+
+sub
+{ vertical-align:sub; font-size:smaller; }
+
+sup
+{ vertical-align:super; font-size:smaller; }
+
+pre
+{ padding:15px;
+
+  /* www.pathf.com/blogs/2008/05/formatting-quoted-code-in-blog-posts-css21-white-space-pre-wrap/ */
+  white-space: pre; /* CSS2 */
+  white-space: pre-wrap; /* CSS 2.1 */
+  white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
+  word-wrap: break-word; /* IE */
+}
+
+textarea
+{ overflow:auto; }
+
+.ie6 legend, .ie7 legend
+{ margin-left: -7px; } /* thnx ivannikolic! */
+
+/* align checkboxes, radios, text inputs with their label */
+input[type="radio"]			{ vertical-align:text-bottom; }
+input[type="checkbox"]		{ vertical-align:bottom; }
+.ie7 input[type="checkbox"]	{ vertical-align:baseline; }
+.ie6 input					{ vertical-align:text-bottom; }
+
+/* hand cursor on clickable input elements */
+label, input[type=button], input[type=submit], button, .pointer
+{ cursor:pointer; }
+
+/* webkit browsers add a 2px margin outside the chrome of form elements */
+button, input, select, textarea
+{ margin:0; }
+
+/* colors for form validity */
+input:valid, textarea:valid { }
+input:invalid, textarea:invalid {
+      border-radius:1px;
+    -moz-box-shadow:0px 0px 5px red;
+ -webkit-box-shadow:0px 0px 5px red;
+         box-shadow:0px 0px 5px red;
+}
+.no-boxshadow input:invalid,
+.no-boxshadow textarea:invalid { background-color:#f0dddd; }
+
+
+::-moz-selection
+{ background:#ff5e99; color:#fff; text-shadow:none; }
+
+::selection
+{ background:#ff5e99; color:#fff; text-shadow:none; }
+
+
+/* make buttons play nice in IE */
+button
+{ overflow:visible; width:auto; }
+
+/* bicubic resizing for non-native sized IMG */
+.ie7 img
+{ -ms-interpolation-mode: bicubic; }
+
+
+
+/*
+ * HELPER CLASSES
+ */
+
+/* Hide for both screenreaders and browsers */
+.hidden
+{ display:none; visibility:hidden; }
+
+/* Hide only visually, but have it available for screenreaders */
+.visuallyHidden
+{ position:absolute !important; clip:rect(1px 1px 1px 1px); clip:rect(1px, 1px, 1px, 1px); }
+
+/* Hide visually and from screenreaders, but maintain layout */
+.invisible
+{ visibility:hidden; }
+
+.clearfix:after	{ content:"\0020"; display:block; height:0; clear:both; visibility:hidden; }
+.clearfix		{ zoom:1; }
+
+.flash
+{ background:#fff9d7; border:1px solid #e2c822; color:black; margin:1em 0; padding:1em; }

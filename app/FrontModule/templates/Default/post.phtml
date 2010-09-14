@@ -1,0 +1,83 @@
+{block #content}
+
+<div id="posts">
+
+	<div class="post single">
+		<h2 class="entry-title"><a href="{plink Default:post 'slug'=>$post->getSlug()}">{$post->getHeadline()}</a></h2>
+		<p class="entry-date">{$post->getCreated()->format('M j, Y')}</p>
+		<p class="comments-link"><a href="{plink Default:post 'slug'=>$post->getSlug()}#comments">{=count($comments)}</a></p>
+
+		<div class="entry-content">
+			{!$post->getText()}
+		</div><!-- .entry-content -->
+
+		<p class="tag-links">
+			<span>tagy: </span>
+			{foreach $post->getTags() as $tag}
+				<a href="{plink Default:tag 'tag'=>$tag->getName()}">{$tag->getName()}</a>
+				{if !$iterator->isLast()}|{/if}
+			{/foreach}
+		</p>
+	</div><!-- .post -->
+
+
+
+
+
+	<div id="comments">
+		<h3>Comments</h3>
+
+		<p class="comments-link">{=count($comments)}</p>
+
+		{if count($comments)}
+
+			<ol id="commentlist">
+				{foreach $comments as $comment}
+					<li id="comment-{$comment->getId()}">
+						<div class="commentHead">
+							<a class="commentPermalink" href="#comment-{$comment->getId()}">#{$iterator->getCounter()}</a>
+							<div class="commentAuthor">{$comment->getAuthor()}</div>
+							<p class="commentDate">{$comment->getCreated()->format('M j, Y')}</p>
+						</div>
+
+						<div class="commentBody">
+							{!$comment->getText()}
+						</div>
+					</li><!-- comment -->
+				{/foreach}
+			</ol><!-- #commentlist -->
+
+		{else}
+
+			<p>No comments yet</p>
+
+		{/if}
+
+
+		<h3>Leave a Reply</h3>
+
+		<form action="" method="post" id="commentform">
+
+				{*if is_user_logged_in()*}
+
+					<p>Logged in as <a href="profile.php">{*$user_identity*}</a>.
+					<a href="logout" title="Log out of this account">Log out &raquo;</a></p>
+
+				{*else*}
+
+					<p>
+						<input id="author" name="author" type="text">
+						<label for="author">Name</label>
+					</p>
+
+				{*/if*}
+
+				<p><textarea name="comment" cols="58" rows="10"></textarea></p>
+				<p><input name="submit" type="submit" value="Submit Comment"></p>
+
+
+		</form>
+
+	</div><!-- #comments -->
+
+</div><!-- #posts -->

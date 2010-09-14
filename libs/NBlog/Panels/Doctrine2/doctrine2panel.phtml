@@ -1,0 +1,41 @@
+<style>
+	#nette-debug-doctrine2 table { width:100% }
+	#nette-debug #nette-debug-doctrine2 a { color:#333;background:transparent }
+	#nette-debug-doctrine2 pre.nette-dump span { color:#c16549 }
+	#nette-debug-doctrine2 td.doctrine2-sql { background: #fff }
+	#nette-debug-doctrine2 .nette-alt td.doctrine2-sql { background: #f5f5f5 }
+</style>
+
+
+<h1>Queries: <?php echo count($queries); ?>, time: <?php echo $totalTime ?> ms</h1>
+
+<div class="nette-inner">
+	<table>
+		<tr><th colspan="4">Connection Platform</th></tr>
+		<tr><td colspan="4"><?php echo $platform ?></td></tr>
+		<tr>
+			<th>Time</th>
+			<th>SQL Statement</th>
+			<th>Params</th>
+			<th>Types</th>
+		</tr>
+
+		<?php if (count($queries) > 0): ?>
+
+			<?php foreach ($queries as $query): ?>
+				<tr<?php if ($i % 2 == 0): ?> class="nette-alt"<?php endif ?>>
+					<td><?php echo $query['execution'] ?></td>
+					<td class="doctrine2-sql"><code><?php echo self::dump($query['sql']) ?></code></td>
+					<td><?php dump($query['params']) ?></td>
+					<td><?php dump($query['types']) ?></td>
+				</tr>
+				<?php $i++ ?>
+			<?php endforeach; ?>
+
+		<?php else: ?>
+
+			<tr><td>No SQL logs found</td></tr>
+
+		<?php endif ?>
+	</table>
+</div>
