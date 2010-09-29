@@ -56,6 +56,36 @@ class Post extends BaseEntity
 	}
 	// </editor-fold>
 
+	// <editor-fold defaultstate="collapsed" desc="status [string]">
+	/** @column(type="string", length=45) */
+	private $status;
+
+	public function getStatus()
+	{
+		return $this->status;
+	}
+
+	public function setStatus($status)
+	{
+		$this->status = $status;
+	}
+	// </editor-fold>
+
+	// <editor-fold defaultstate="collapsed" desc="commentsCount [integer]">
+	/** @column(type="integer") */
+	private $commentsCount;
+
+	public function getCommentsCount()
+	{
+		return $this->commentsCount;
+	}
+
+	public function setCommentsCount($commentsCount)
+	{
+		$this->commentsCount = $commentsCount;
+	}
+	// </editor-fold>
+
 	// <editor-fold defaultstate="collapsed" desc="created [datetime]">
 	/** @column(type="datetime") */
 	private $created;
