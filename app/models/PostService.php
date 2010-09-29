@@ -9,15 +9,36 @@ use Nette\Debug,
 class PostService extends BaseService
 {
 
-	public function getPosts($page = 1)
+	// <editor-fold defaultstate="collapsed" desc="postsPerPage">
+	private $postsPerPage = 10;
+
+	public function getPostsPerPage()
 	{
-		$qb = $this->dbm->createQueryBuilder();
+		return $this->postsPerPage;
+	}
 
-		$qb->select('p')
-		   ->from('\NBlog\Entities\Post', 'p')
-		   ->orderBy('p.created', 'DESC');
+	public function setPostsPerPage($postsPerPage)
+	{
+		$this->postsPerPage = $postsPerPage;
+	}
+	// </editor-fold>
 
-		return $qb->getQuery()->getResult();
+
+	public function getPublishedPosts($page = 1)
+	{
+
+		$result = $this->dbm->createQueryBuilder()
+			->select('p')
+			->from('\NBlog\Entities\Post', 'p')
+			->where("p.status = 'published'")
+			->orderBy('p.created', 'DESC')
+			->getQuery()
+				->setFirstResult($page - 1)
+				->setMaxResults($this->getPostsPerPage())
+
+			->getResult();	//FIXME Eagerload Tags
+
+		return $result;
 	}
 
 

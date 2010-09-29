@@ -12,7 +12,9 @@ class DefaultPresenter extends \BasePresenter
 	public function renderDefault()
 	{
 		$postService = new PostService();
-		$this->template->posts = $postService->getPosts();
+		$postService->setPostsPerPage = 10;
+		$page = 1;
+		$this->template->posts = $postService->getPublishedPosts($page);
 	}
 
 
