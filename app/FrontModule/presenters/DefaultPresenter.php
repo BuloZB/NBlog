@@ -14,6 +14,7 @@ class DefaultPresenter extends \BasePresenter
 		$postService = new PostService();
 		$postService->setPostsPerPage = 10;
 		$page = 1;
+
 		$this->template->posts = $postService->getPublishedPosts($page);
 	}
 
@@ -28,21 +29,18 @@ class DefaultPresenter extends \BasePresenter
 		}
 
 		$this->template->post = $post;
-		$this->template->comments = $post->getComments();
+		$this->template->comments = ($post->getCommentsCount() > 0) ? $post->getComments() : null;
 	}
 
 
 	public function renderTag($tag)
 	{
-		$postService = new TagService();
-		$tagEntity = $postService->getTag($tag);
+		$postService = new PostService();
+		$postService->setPostsPerPage = 10;
+		$page = 1;
 
-		if (!$tagEntity) {
-			$this->redirect('default');
-		}
-
-		$this->template->tagName = $tagEntity->getName();
-		$this->template->posts = $tagEntity->getPosts();
+		$this->template->posts = $postService->getPostsByTag($tag, $page);
+		$this->template->tagName = $tag;
 	}
 
 }

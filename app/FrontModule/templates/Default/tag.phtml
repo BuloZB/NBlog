@@ -8,10 +8,10 @@
 		<div class="post">
 			<h3 class="entry-title"><a href="{plink Default:post 'slug'=>$post->getSlug()}">{$post->getHeadline()}</a></h3>
 			<p class="entry-date">{$post->getCreated()->format('M j, Y')}</p>
-			<p class="comments-link"><a href="{plink Default:post 'slug'=>$post->getSlug()}#comments">{=count($post->getComments())}</a></p>
+			<p class="comments-link"><a href="{plink Default:post 'slug'=>$post->getSlug()}#comments">{$post->getCommentsCount()}</a></p>
 
 			<div class="entry-content">
-				{!$post->getText()}
+				{!$post->getText()|perex}
 			</div><!-- .entry-content -->
 		</div><!-- .post -->
 

@@ -2,8 +2,7 @@
 
 namespace NBlog\ORM\Services;
 
-use Nette\Debug,
-	Doctrine\ORM\NoResultException;
+use	Doctrine\ORM\NoResultException;
 
 
 class PostService extends BaseService
@@ -26,17 +25,17 @@ class PostService extends BaseService
 
 	public function getPublishedPosts($page = 1)
 	{
-
 		$result = $this->dbm->createQueryBuilder()
 			->select('p')
 			->from('\NBlog\Entities\Post', 'p')
 			->where("p.status = 'published'")
 			->orderBy('p.created', 'DESC')
+			//FIXME Eagerload Tags
 			->getQuery()
 				->setFirstResult($page - 1)
 				->setMaxResults($this->getPostsPerPage())
 
-			->getResult();	//FIXME Eagerload Tags
+			->getResult();
 
 		return $result;
 	}
@@ -44,18 +43,39 @@ class PostService extends BaseService
 
 	public function getPost($slug)
 	{
-		$qb = $this->dbm->createQueryBuilder();
-
-		$qb->select('p')
-		   ->from('\NBlog\Entities\Post', 'p')
-		   ->where('p.slug = ?1')
-		   ->setParameter(1, $slug);
+		$q = $this->dbm->createQueryBuilder()
+			->select('p')
+			->from('\NBlog\Entities\Post', 'p')
+			->where('p.slug = ?1')
+			->setParameter(1, $slug)
+			//FIXME Eagerload Tags
+			->getQuery();
 
 		try {
-			$result = $qb->getQuery()->getSingleResult();
+			$result = $q->getSingleResult();
 		} catch(NoResultException $e) {
 			$result = null;
 		}
+
+		return $result;
+	}
+
+
+	public function getPostsByTag($tag, $page = 1)
+	{
+		$result = $this->dbm->createQueryBuilder()
+			->select('p')
+			->from('\NBlog\Entities\Post', 'p')
+			->leftJoin('p.tags', 't')
+			->where("p.status = 'published'")
+			->andWhere("t.name = ?1")
+			->orderBy('p.created', 'DESC')
+			->setParameter(1, $tag)
+			->getQuery()
+				->setFirstResult($page - 1)
+				->setMaxResults($this->getPostsPerPage())
+
+			->getResult();
 
 		return $result;
 	}
