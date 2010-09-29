@@ -5,3 +5,4 @@ libs/Doctrine/*
 var/proxies/*
 var/sessions/*
 var/temp/*
+!var/temp/cache
