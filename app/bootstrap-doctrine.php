@@ -41,7 +41,7 @@ if ($database->driver == 'pdo_mysql') {
 
 // EntityManager
 $entityManager = EntityManager::create((array) $database, $config, $eventManager);
-Environment::getServiceLocator()->addService('Doctrine\ORM\EntityManager', $entityManager);
+Environment::getContext()->addService('Doctrine\ORM\EntityManager', $entityManager);
 
 
 // Aliases

@@ -8,6 +8,7 @@ define('CLI_DIR',	__DIR__);
 define('APP_DIR',	CLI_DIR . '/../app');
 define('LIBS_DIR',	CLI_DIR . '/../libs');
 define('VAR_DIR',	CLI_DIR . '/../var');
+define('TEMP_DIR',	VAR_DIR . '/temp');
 
 require LIBS_DIR . '/Nette/loader.php';
 

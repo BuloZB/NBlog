@@ -7,7 +7,7 @@
 header { background-color:#eaeaea; height:100px; margin:0 0 10px; position:relative; }
 
 	header h1 { position:absolute; left:15px; top:20px; }
-	header h1 a { color:#dedede; display:block; font-size:200%; height:60px; overflow:hidden; position:relative; width:182px; }
+	header h1 a { color:#dedede; display:block; font-size:200%; height:60px; overflow:hidden; position:relative; width:192px; }
 	header h1 a:focus { outline:medium dotted #607890; }
 	header h1 a span { background:url('../images/homelink.png') 0 0 no-repeat; cursor:pointer; position:absolute; left:0; top:0; height:100%; width:100%; z-index:10; }
 
