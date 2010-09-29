@@ -2,8 +2,8 @@
 
 namespace FrontModule;
 
-use \NBlog\ORM\Services\PostService,
-	\NBlog\ORM\Services\TagService;
+use	NBlog\ORM\Services\PostService,
+	FrontModule\Forms\CommentForm;
 
 
 class DefaultPresenter extends \BasePresenter
@@ -43,4 +43,9 @@ class DefaultPresenter extends \BasePresenter
 		$this->template->tagName = $tag;
 	}
 
+
+	protected function createComponentCommentForm($name)
+	{
+		$form = new CommentForm($this, $name);
+	}
 }

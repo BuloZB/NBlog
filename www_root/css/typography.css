@@ -68,6 +68,9 @@ pre
 textarea
 { overflow:auto; }
 
+label.required
+{ font-weight:bold; }
+
 .ie6 legend, .ie7 legend
 { margin-left: -7px; } /* thnx ivannikolic! */
 

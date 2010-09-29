@@ -1,3 +1,9 @@
+{block #javascripts}
+	<script src="{$basePath}/js/jquery.nette.js"></script>
+	<script src="{$basePath}/js/jquery.ajaxform.js"></script>
+{/block}
+
+
 {block #content}
 
 <div id="posts">
@@ -29,7 +35,7 @@
 
 		<p class="comments-link">{=count($comments)}</p>
 
-		{if count($comments)}
+		{if !empty($comments)}
 
 			<ol id="commentlist">
 				{foreach $comments as $comment}
@@ -56,27 +62,46 @@
 
 		<h3>Leave a Reply</h3>
 
-		<form action="" method="post" id="commentform">
 
-				{*if is_user_logged_in()*}
+		{control commentForm begin}
 
+			{control commentForm errors}
+			{var form => $control['commentForm']}
+
+			{*if is_user_logged_in()*}
+
+					<!--
 					<p>Logged in as <a href="profile.php">{*$user_identity*}</a>.
 					<a href="logout" title="Log out of this account">Log out &raquo;</a></p>
+					-->
 
-				{*else*}
+			{*else*}
 
-					<p>
-						<input id="author" name="author" type="text">
-						<label for="author">Name</label>
-					</p>
+				<p>
+					{$form['author']->control}
+					{$form['author']->label}
+				</p>
 
-				{*/if*}
+				<p>
+					{$form['authorEmail']->control}
+					{$form['authorEmail']->label}
+				</p>
 
-				<p><textarea name="comment" cols="58" rows="10"></textarea></p>
-				<p><input name="submit" type="submit" value="Submit Comment"></p>
+				<p>
+					{$form['authorUrl']->control}
+					{$form['authorUrl']->label}
+				</p>
 
+			{*/if*}
 
-		</form>
+			<p>
+				{$form['comment']->control}
+				{$form['comment']->label}
+			</p>
+
+			<p>{$form['send']->control}</p>
+
+		{control commentForm end}
 
 	</div><!-- #comments -->
 
