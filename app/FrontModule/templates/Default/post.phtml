@@ -1,6 +1,11 @@
 {block #javascripts}
 	<script src="{$basePath}/js/jquery.nette.js"></script>
 	<script src="{$basePath}/js/jquery.ajaxform.js"></script>
+	<script>
+		$(function() {
+			//$("form").ajaxSubmit();
+		});
+	</script>
 {/block}
 
 
@@ -42,8 +47,14 @@
 					<li id="comment-{$comment->getId()}">
 						<div class="commentHead">
 							<a class="commentPermalink" href="#comment-{$comment->getId()}">#{$iterator->getCounter()}</a>
-							<div class="commentAuthor">{$comment->getAuthor()}</div>
-							<p class="commentDate">{$comment->getCreated()->format('M j, Y')}</p>
+							<div class="commentAuthor">
+								{if $comment->getAuthorUrl()}
+									<a href="http://{$comment->getAuthorUrl()}">{$comment->getAuthor()}</a>
+								{else}
+									{$comment->getAuthor()}
+								{/if}
+							</div>
+							<p class="commentDate">{$comment->getCreated()->format('M j, Y, H:i')}</p>
 						</div>
 
 						<div class="commentBody">

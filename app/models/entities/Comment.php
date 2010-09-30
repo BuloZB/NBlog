@@ -2,6 +2,8 @@
 
 namespace NBlog\Entities;
 
+use	NBlog\Entities\Post;
+
 
 /**
  * @Entity
@@ -20,7 +22,7 @@ class Comment extends BaseEntity
 
 	public function setAuthor($author)
 	{
-		$this->author = $author;
+		$this->author = trim($author);
 	}
 	// </editor-fold>
 
@@ -50,7 +52,8 @@ class Comment extends BaseEntity
 
 	public function setAuthorUrl($authorUrl)
 	{
-		$this->authorUrl = $authorUrl;
+		$authorUrl = trim($authorUrl);
+		$this->authorUrl = (empty($authorUrl)) ? null : $authorUrl;
 	}
 	// </editor-fold>
 
@@ -60,12 +63,12 @@ class Comment extends BaseEntity
 
 	public function getAuthorIp()
 	{
-		return $this->authorIp;
+		return long2ip($this->authorIp);
 	}
 
 	public function setAuthorIp($authorIp)
 	{
-		$this->authorIp = $authorIp;
+		$this->authorIp = ip2long($authorIp);
 	}
 	// </editor-fold>
 
@@ -80,7 +83,7 @@ class Comment extends BaseEntity
 
 	public function setText($text)
 	{
-		$this->email = $text;
+		$this->text = trim($text);
 	}
 	// </editor-fold>
 
@@ -140,7 +143,7 @@ class Comment extends BaseEntity
 		return $this->post;
 	}
 
-	public function setPost($post)
+	public function setPost(Post $post)
 	{
 		$this->post = $post;
 	}

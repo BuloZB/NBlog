@@ -3,7 +3,8 @@
 namespace FrontModule\Forms;
 
 use	Nette\Application\AppForm,
-	Nette\Forms\Form;
+	Nette\Forms\Form,
+	NBlog\ORM\Services\CommentService;
 
 
 class CommentForm extends AppForm
@@ -34,6 +35,18 @@ class CommentForm extends AppForm
 	public function formSubmitted(AppForm $form)
 	{
 		$values = $form->getValues();
+		$commentService = new CommentService();
+
+		try {
+			$commentService->insertNew(
+				$this->getValues(),
+				$this->getPresenter()->getParam('slug'),
+				$this->getHttpRequest()
+			);
+		} catch (Exception $e) {
+			$this->presenter->flashMessage('Saving of new comment failed', 'error');
+			$this->presenter->redirect('this');
+		}
 
 		$this->presenter->flashMessage('Comment was successfuly sent', 'info');
 		$this->presenter->redirect('this');
