@@ -64,6 +64,10 @@ if (Environment::getName() !== 'console') {
 	}
 
 
+	// Session
+	Environment::getSession()->start();
+
+
 	// Run the application!!!
 	$application->run();
 

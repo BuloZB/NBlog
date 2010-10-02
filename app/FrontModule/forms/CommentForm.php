@@ -14,7 +14,7 @@ class CommentForm extends AppForm
 	{
 		parent::__construct($parent, $name);
 
-		$this->addProtection('Security token did not match. Possible CSRF attack.', 3);
+		$this->addProtection('Security token did not match. Possible CSRF attack.');
 
 		$this->addText('author', 'Author')
 			->addRule(Form::FILLED, 'Enter name');
@@ -48,26 +48,38 @@ class CommentForm extends AppForm
 			);
 		} catch (Exception $e) {
 			$this->presenter->flashMessage('Saving of new comment failed', 'error');
-			$this->response();
+			$this->response(false);
 		}
 
-		$this->presenter->flashMessage('Comment was successfuly sent', 'info');
-		$this->response();
+		$this->presenter->flashMessage('Comment was successfuly saved', 'info');
+		$this->response(true);
 	}
 
 
 	public function formInvalid(AppForm $form)
 	{
-		$this->getPresenter()->invalidateControl('pokus');
+		if ($this->getPresenter()->isAjax()) {
+			$this->response(false);
+		}
 	}
 
-	private function response()
+
+	private function response($success = true)
 	{
 		if ($this->getPresenter()->isAjax()) {
-			$form->setValues(array(), TRUE);
-			$this->invalidateControl('pokus');
+			if ($success) {
+				$commentService = new CommentService();
+				$comments = $commentService->getBySlug($this->getPresenter()->getParam('slug'));
+				$this->getPresenter()->template->comments = $comments;
+
+				$this->getPresenter()->invalidateControl('comments');
+				$this->getPresenter()->invalidateControl('commentsLink');
+				$this->setValues(array(), true);
+			}
+
+			$this->getPresenter()->invalidateControl('commentForm');
 		} else {
-			$this->presenter->redirect('this#comments');
+			$this->getPresenter()->redirect('this#comments');
 		}
 	}
 }

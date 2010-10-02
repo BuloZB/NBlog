@@ -13,7 +13,7 @@ jQuery.extend({
 			$("#" + id).html(html);
 		},
 
-		success: function (payload) {
+		success: function (payload, callback) {
 			// redirect
 			if (payload.redirect) {
 				window.location.href = payload.redirect;
@@ -25,6 +25,10 @@ jQuery.extend({
 				for (var i in payload.snippets) {
 					jQuery.nette.updateSnippet(i, payload.snippets[i]);
 				}
+			}
+
+			if (callback) {
+				callback();
 			}
 		}
 	}

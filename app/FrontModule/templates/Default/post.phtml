@@ -1,28 +1,7 @@
 {block #javascripts}
 	<script src="{$basePath}/js/jquery.nette.js"></script>
 	<script src="{$basePath}/js/jquery.ajaxform.js"></script>
-	<script>
-		function ancovicky() {
-			console.info('booom');
-		}
-
-		$(function() {
-			$('form[id*="commentForm"]').find('input[type="submit"]').live('click', (function(e) {
-				e.preventDefault();
-
-				$frm = $(this);
-				$errs = $('form[id*="commentForm"]').find('span.error');
-
-				if ($errs.length) {
-					$errs.fadeOut(800, function() {
-						$frm.ajaxSubmit();
-					});
-				} else {
-					$frm.ajaxSubmit();
-				}
-			}));
-		});
-	</script>
+	<script src="{$basePath}/js/views/post.js"></script>
 {/block}
 
 
@@ -33,7 +12,9 @@
 	<div class="post single">
 		<h2 class="entry-title"><a href="{plink Default:post 'slug'=>$post->getSlug()}">{$post->getHeadline()}</a></h2>
 		<p class="entry-date">{$post->getCreated()->format('M j, Y')}</p>
-		<p class="comments-link"><a href="{plink Default:post 'slug'=>$post->getSlug()}#comments">{=count($comments)}</a></p>
+		{snippet:commentsLink}
+			<p class="comments-link"><a href="{plink Default:post 'slug'=>$post->getSlug()}#comments">{=count($comments)}</a></p>
+		{/snippet}
 
 		<div class="entry-content">
 			{!$post->getText()}
@@ -55,50 +36,53 @@
 	<div id="comments">
 		<h3>Comments</h3>
 
-		<p class="comments-link">{=count($comments)}</p>
+		{snippet:comments}
+			<p class="comments-link">{=count($comments)}</p>
 
-		{if !empty($comments)}
+			{if !empty($comments)}
 
-			<ol id="commentlist">
-				{foreach $comments as $comment}
-					<li id="comment-{$comment->getId()}">
-						<div class="commentHead">
-							<a class="commentPermalink" href="#comment-{$comment->getId()}">#{$iterator->getCounter()}</a>
-							<div class="commentAuthor">
-								{if $comment->getAuthorUrl()}
-									<a href="http://{$comment->getAuthorUrl()}">{$comment->getAuthor()}</a>
-								{else}
-									{$comment->getAuthor()}
-								{/if}
+				<ol id="commentlist">
+					{foreach $comments as $comment}
+						<li id="comment-{$comment->getId()}">
+							<div class="commentHead">
+								<a class="commentPermalink" href="#comment-{$comment->getId()}">#{$iterator->getCounter()}</a>
+								<div class="commentAuthor">
+									{if $comment->getAuthorUrl()}
+										<a href="http://{$comment->getAuthorUrl()}">{$comment->getAuthor()}</a>
+									{else}
+										{$comment->getAuthor()}
+									{/if}
+								</div>
+								<p class="commentDate">{$comment->getCreated()->format('M j, Y, H:i')}</p>
 							</div>
-							<p class="commentDate">{$comment->getCreated()->format('M j, Y, H:i')}</p>
-						</div>
 
-						<div class="commentBody">
-							{!$comment->getText()}
-						</div>
-					</li><!-- comment -->
-				{/foreach}
-			</ol><!-- #commentlist -->
+							<div class="commentBody">
+								{!$comment->getText()}
+							</div>
+						</li><!-- comment -->
+					{/foreach}
+				</ol><!-- #commentlist -->
 
-		{else}
+			{else}
 
-			<p>No comments yet</p>
+				<p>No comments yet</p>
 
-		{/if}
-
-
-		<h3>Leave a Reply</h3>
+			{/if}
+		{/snippet}
 
 
-		{snippet:pokus}
+		{snippet:commentForm}
 			{control commentForm begin}
 
 				{var form => $control['commentForm']}
 
-				{if $form->hasErrors()}
-					<h3>Form contains errors</h3>
+				{if !$form->hasErrors()}
+					<h3>Leave a Reply</h3>
+				{else}
+					<h3 class="error">Form contains errors</h3>
 				{/if}
+
+				<span class="error bottom" n:foreach="$form[Nette\Forms\Form::PROTECTOR_ID]->errors as $error">{$error}</span>
 
 				{*if is_user_logged_in()*}
 

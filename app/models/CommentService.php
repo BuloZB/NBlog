@@ -9,6 +9,22 @@ use	NBlog\Entities\Comment,
 class CommentService extends BaseService
 {
 
+	public function getBySlug($slug)
+	{
+		$result = $this->dbm->createQueryBuilder()
+			->select('c')
+			->from('\NBlog\Entities\Comment', 'c')
+			->leftJoin('c.post', 'p')
+			->where("p.slug = ?1")
+			->orderBy('c.created', 'ASC')
+			->setParameter(1, $slug)
+			->getQuery()
+			->getResult();
+
+		return $result;
+	}
+
+
 	public function insertNew($data, $slug, $request)
 	{
 		$comment = new Comment();
@@ -26,7 +42,7 @@ class CommentService extends BaseService
 
 		$postService = new PostService();
 		$post = $postService->getPost($slug);
-		$post->setCommentsCount($post->setCommentsCount() + 1);
+		$post->setCommentsCount($post->getCommentsCount() + 1);
 		$comment->setPost($post);
 
 		$this->dbm->persist($comment);

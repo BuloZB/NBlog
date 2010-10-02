@@ -47,7 +47,7 @@ header { background-color:#eaeaea; height:100px; margin:0 0 10px; position:relat
 
 
 #comments { margin:0 2em 0 0; }
-	#comments h3 { clear:both; color:#888; float:left; font-size:120%; }
+	#comments h3 { clear:both; float:left; }
 
 	#comments .comments-link {
 		-moz-border-radius:10px; -o-border-radius:10px; -webkit-border-radius:10px; border-radius:10px;
@@ -62,7 +62,9 @@ header { background-color:#eaeaea; height:100px; margin:0 0 10px; position:relat
 			#commentlist .commentDate { clear:left; color:#888; float:left; font-size:75%; margin:0 0 0 0.5em; }
 		#commentlist .commentBody {}
 
-	#comments form { clear:both; }
+	#comments form { clear:both; position:relative; }
+		#commentFormHide { background-color:#eaeaea; height:100%; left:0; position:absolute; top:0; width:100%; }
+
 	#comments p { clear:both; }
 
 
