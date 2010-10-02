@@ -14,6 +14,8 @@ class CommentForm extends AppForm
 	{
 		parent::__construct($parent, $name);
 
+		$this->addProtection('Security token did not match. Possible CSRF attack.', 3);
+
 		$this->addText('author', 'Author')
 			->addRule(Form::FILLED, 'Enter name');
 
@@ -29,6 +31,7 @@ class CommentForm extends AppForm
 
 		$this->addSubmit('send', 'Send');
 		$this->onSubmit[] = array($this, 'formSubmitted');
+		$this->onInvalidSubmit[] = array($this, 'formInvalid');
 	}
 
 
@@ -45,11 +48,26 @@ class CommentForm extends AppForm
 			);
 		} catch (Exception $e) {
 			$this->presenter->flashMessage('Saving of new comment failed', 'error');
-			$this->presenter->redirect('this');
+			$this->response();
 		}
 
 		$this->presenter->flashMessage('Comment was successfuly sent', 'info');
-		$this->presenter->redirect('this');
+		$this->response();
 	}
 
+
+	public function formInvalid(AppForm $form)
+	{
+		$this->getPresenter()->invalidateControl('pokus');
+	}
+
+	private function response()
+	{
+		if ($this->getPresenter()->isAjax()) {
+			$form->setValues(array(), TRUE);
+			$this->invalidateControl('pokus');
+		} else {
+			$this->presenter->redirect('this#comments');
+		}
+	}
 }

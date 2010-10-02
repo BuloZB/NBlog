@@ -13,4 +13,12 @@ abstract class BasePresenter extends Presenter
 		return $template;
 	}
 
+
+	public function afterRender()
+	{
+		if ($this->isAjax() && $this->hasFlashSession()) {
+			$this->invalidateControl('flashes');
+		}
+	}
+
 }

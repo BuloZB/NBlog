@@ -21,7 +21,6 @@
 
 
 	<div id="main">
-		{foreach $flashes as $flash}<div class="flash {$flash->type}">{$flash->message}</div>{/foreach}
 		{include #content}
 	</div><!-- #main -->
 
@@ -33,7 +32,15 @@
 
 </div><!-- #wrapper -->
 
-
+{snippet:flashes}
+	{if !empty($flashes)}
+		<div id="flashes">
+			{foreach $flashes as $flash}
+				<div class="flash {$flash->type}">{$flash->message}</div>
+			{/foreach}
+		</div>
+	{/if}
+{/snippet}
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script>!window.jQuery && document.write('<script src="{$basePath}/js/jquery-1.4.2.min.js"><\/script>')</script>

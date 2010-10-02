@@ -27,8 +27,7 @@ jQuery.fn.extend({
 		}
 
 		// validation
-		if (form.get(0).onsubmit && !form.get(0).onsubmit()) return null;
-		//if (form.get(0).onsubmit && form.get(0).onsubmit() == false) return null;
+		if (form.get(0).onsubmit && form.get(0).onsubmit() == false) return null;
 
 		// get values
 		var values = form.serializeArray();

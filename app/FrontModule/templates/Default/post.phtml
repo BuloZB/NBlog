@@ -2,8 +2,25 @@
 	<script src="{$basePath}/js/jquery.nette.js"></script>
 	<script src="{$basePath}/js/jquery.ajaxform.js"></script>
 	<script>
+		function ancovicky() {
+			console.info('booom');
+		}
+
 		$(function() {
-			//$("form").ajaxSubmit();
+			$('form[id*="commentForm"]').find('input[type="submit"]').live('click', (function(e) {
+				e.preventDefault();
+
+				$frm = $(this);
+				$errs = $('form[id*="commentForm"]').find('span.error');
+
+				if ($errs.length) {
+					$errs.fadeOut(800, function() {
+						$frm.ajaxSubmit();
+					});
+				} else {
+					$frm.ajaxSubmit();
+				}
+			}));
 		});
 	</script>
 {/block}
@@ -74,45 +91,54 @@
 		<h3>Leave a Reply</h3>
 
 
-		{control commentForm begin}
+		{snippet:pokus}
+			{control commentForm begin}
 
-			{control commentForm errors}
-			{var form => $control['commentForm']}
+				{var form => $control['commentForm']}
 
-			{*if is_user_logged_in()*}
+				{if $form->hasErrors()}
+					<h3>Form contains errors</h3>
+				{/if}
 
-					<!--
-					<p>Logged in as <a href="profile.php">{*$user_identity*}</a>.
-					<a href="logout" title="Log out of this account">Log out &raquo;</a></p>
-					-->
+				{*if is_user_logged_in()*}
 
-			{*else*}
+						<!--
+						<p>Logged in as <a href="profile.php">{*$user_identity*}</a>.
+						<a href="logout" title="Log out of this account">Log out &raquo;</a></p>
+						-->
+
+				{*else*}
+
+					<p>
+						{$form['author']->control}
+						{$form['author']->label}
+						<span class="error" n:foreach="$form['author']->errors as $error">{$error}</span>
+					</p>
+
+					<p>
+						{$form['authorEmail']->control}
+						{$form['authorEmail']->label}
+						<span class="error" n:foreach="$form['authorEmail']->errors as $error">{$error}</span>
+					</p>
+
+					<p>
+						{$form['authorUrl']->control}
+						{$form['authorUrl']->label}
+						<span class="error" n:foreach="$form['authorUrl']->errors as $error">{$error}</span>
+					</p>
+
+				{*/if*}
 
 				<p>
-					{$form['author']->control}
-					{$form['author']->label}
+					{$form['comment']->control}
+					{$form['comment']->label}
+					<span class="error" n:foreach="$form['comment']->errors as $error">{$error}</span>
 				</p>
 
-				<p>
-					{$form['authorEmail']->control}
-					{$form['authorEmail']->label}
-				</p>
+				<p>{$form['send']->control}</p>
 
-				<p>
-					{$form['authorUrl']->control}
-					{$form['authorUrl']->label}
-				</p>
-
-			{*/if*}
-
-			<p>
-				{$form['comment']->control}
-				{$form['comment']->label}
-			</p>
-
-			<p>{$form['send']->control}</p>
-
-		{control commentForm end}
+			{control commentForm end}
+		{/snippet}
 
 	</div><!-- #comments -->
 
