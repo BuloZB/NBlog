@@ -2,30 +2,43 @@
 
 namespace NBlog\Security;
 
-use Nette\Object;
-use Nette\Environment;
-use Nette\Security\IAuthenticator;
-use Nette\Security\Identity;
-use Nette\Security\AuthenticationException;
+use	Nette\Object,
+	Nette\Environment,
+	Nette\Security\IAuthenticator,
+	Nette\Security\Identity,
+	Nette\Security\AuthenticationException,
+	NBlog\ORM\Services\UserService;
+
 
 class Authenticator extends Object implements IAuthenticator
 {
-    public function authenticate(array $credentials)
-    {
-        $login = $credentials[self::USERNAME];
-        $row = \UserModel::getByEmail($login);
 
-        if (!$row) {
-            throw new AuthenticationException("Užívateľ s registračným emailom '$login' sa nenašiel!", self::IDENTITY_NOT_FOUND);
-        }
+	public function authenticate(array $credentials)
+	{
+		$userService = new UserService();
 
-        $config = Environment::getConfig('security');
-        $password =  hash_hmac('sha256', $credentials[self::PASSWORD] . $row->salt , $config->hmacKey);
+		$email = $credentials[self::USERNAME];
+		$user  = $userService->getbyEmail($email);
 
-        if ($row->password !== $password) {
-            throw new AuthenticationException("Zadali ste nesprávne heslo!", self::INVALID_CREDENTIAL);
-        }
+		if (!$user) {
+			throw new AuthenticationException('User with this email does not exist in our system', self::IDENTITY_NOT_FOUND);
+		}
 
-        return new Identity($row->name, $row->role);
-    }
+		$salt = Environment::getConfig('security')->salt;
+		$password =  sha1($credentials[self::PASSWORD] . $salt);
+
+		if ($user->getPassword() !== $password) {
+			throw new AuthenticationException('Wrong password', self::INVALID_CREDENTIAL);
+		}
+
+		return new Identity(
+			$user->getId(),
+			$user->getRole(),
+			array(
+				'name'  => $user->getName(),
+				'email' => $user->getEmail()
+			)
+		);
+	}
+
 }

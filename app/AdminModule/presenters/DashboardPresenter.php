@@ -2,8 +2,7 @@
 
 namespace AdminModule;
 
-use	Nette\Environment,
-	Nette\Web\User;
+use	Nette\Web\User;
 
 
 final class DashboardPresenter extends BasePresenter
@@ -12,7 +11,7 @@ final class DashboardPresenter extends BasePresenter
 	public function startup()
 	{
 		parent::startup();
-		$user = Environment::getUser();
+		$user = $this->getUser();
 
 		if (!$user->isLoggedIn()) {
 			if ($user->getLogoutReason() === User::INACTIVITY) {
@@ -32,7 +31,7 @@ final class DashboardPresenter extends BasePresenter
 
 	public function actionLogout()
 	{
-		Environment::getUser()->signOut();
+		$this->getUser()->logout();
 		$this->flashMessage('You have logged out of administration.', 'info');
 		$this->redirect('Auth:login');
 	}

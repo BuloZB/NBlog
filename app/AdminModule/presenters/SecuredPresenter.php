@@ -2,8 +2,7 @@
 
 namespace AdminModule;
 
-use	Nette\Environment,
-	Nette\Web\User;
+use	Nette\Web\User;
 
 
 final class SecuredPresenter extends BasePresenter
@@ -12,7 +11,7 @@ final class SecuredPresenter extends BasePresenter
 	public function startup()
 	{
 		parent::startup();
-		$user = Environment::getUser();
+		$user = $this->getUser();
 
 		if (!$user->isLoggedIn()) {
 			if ($user->getLogoutReason() === User::INACTIVITY) {

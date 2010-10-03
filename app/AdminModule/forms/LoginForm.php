@@ -4,6 +4,7 @@ namespace AdminModule\Forms;
 
 use	Nette\Application\AppForm,
 	Nette\Forms\Form,
+	Nette\Environment,
 	Nette\Security\AuthenticationException;
 
 
@@ -33,7 +34,7 @@ class LoginForm extends AppForm
 		try {
 
 			$user = Environment::getUser();
-			$user->authenticate($form['login']->value, $form['password']->value);
+			$user->login($form['login']->value, $form['password']->value);
 
 			$this->getPresenter()
 				->getApplication()

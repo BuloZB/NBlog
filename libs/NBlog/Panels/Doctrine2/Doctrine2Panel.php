@@ -24,25 +24,25 @@ class Doctrine2Panel implements SQLLogger, IDebugPanel
 
 
 	/**
-     * {@inheritdoc}
-     */
+	 * {@inheritdoc}
+	 */
 	public function startQuery($sql, array $params = NULL, array $types = NULL)
 	{
 		$this->queries[$this->i] = array('sql' => $sql, 'params' => $params, 'types' => $types);
 		Debug::timer(self::TIMER_NAME);
 	}
-	
+
 
 	/**
-     * {@inheritdoc}
-     */
-    public function stopQuery()
-    {
-    	$executionMS = Debug::timer(self::TIMER_NAME);
-        $this->queries[$this->i]['execution'] = round($executionMS * 1000, 3);
-        $this->totalTime += ($executionMS * 1000);
-        $this->i++;
-    }
+	 * {@inheritdoc}
+	 */
+	public function stopQuery()
+	{
+		$executionMS = Debug::timer(self::TIMER_NAME);
+		$this->queries[$this->i]['execution'] = round($executionMS * 1000, 3);
+		$this->totalTime += ($executionMS * 1000);
+		$this->i++;
+	}
 
 
 	public function getPanel()

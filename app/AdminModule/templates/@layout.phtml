@@ -17,8 +17,8 @@
 		<h1><a href="{$baseUri}">NBlog<span></span></a></h1>
 
 		<p id="userbox">
-			loggedin <strong>{$user->name}</strong> [{? echo implode(', ', $user->roles)}] |
-			<a href="{link Default:logout}">odhlásiť</a>
+			loggedin <strong>{$user->getIdentity()->name}</strong> [{? echo implode(', ', $user->roles)}] |
+			<a href="{link Dashboard:logout}">odhlásiť</a>
 		</p><!-- #userbox -->
 	</header>
 

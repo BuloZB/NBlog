@@ -7,6 +7,7 @@ use Nette\Security\Permission;
 
 class Acl extends Permission
 {
+
 	public function __construct()
 	{
 		// roles
@@ -14,11 +15,11 @@ class Acl extends Permission
 		$this->addRole('admin');
 
 		// resources
-		$this->addResource('AdminModule\DashboardPresenter');
-		$this->addResource('AdminModule\PostPresenter');
-		$this->addResource('AdminModule\CommentPresenter');
-		$this->addResource('AdminModule\MediaPresenter');
-		$this->addResource('AdminModule\SettingsPresenter');
+		$this->addResource('Admin:Dashboard');
+		$this->addResource('Admin:Post');
+		$this->addResource('Admin:Comment');
+		$this->addResource('Admin:Media');
+		$this->addResource('Admin:Settings');
 
 		// privileges
 		$this->allow('admin', Permission::ALL, Permission::ALL);
