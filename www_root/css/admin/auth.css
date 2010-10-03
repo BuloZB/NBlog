@@ -1,0 +1,25 @@
+@import url("../reset.css?v=1");
+@import url(".t/ypography.css?v=1");
+
+
+body { background-color:#eaeaea; color:#444; font-family:sans-serif; font-size:85%; text-align:center; }
+
+
+/** HEADER **/
+header { margin:50px 0; }
+
+	header h1 { display:inline-block; font-size:155%; height:60px; position:relative; width:292px; }
+	header h1 a { display:block; height:100%; overflow:hidden; position:relative; width:100%; }
+	header h1 a:focus { outline:medium dotted #607890; }
+	header h1 a span { background:url('../../images/admin/homelink.png') 0 0 no-repeat; cursor:pointer; position:absolute; left:0; top:0; height:100%; width:100%; z-index:10; }
+
+
+/** MAIN **/
+
+table { margin:0 auto; }
+	th, td { padding:0.25em; }
+	th { text-align:right; }
+	td { text-align:left; }
+	table input.button { margin:1em 0 0; }
+
+	ul.error { color:#633; display:inline-block; font-size:85%; line-height:1.5; margin:0 auto 1em; text-align:left; }

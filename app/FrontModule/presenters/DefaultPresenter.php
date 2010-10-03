@@ -6,7 +6,7 @@ use	NBlog\ORM\Services\PostService,
 	FrontModule\Forms\CommentForm;
 
 
-class DefaultPresenter extends \BasePresenter
+class DefaultPresenter extends BasePresenter
 {
 
 	public function renderDefault()

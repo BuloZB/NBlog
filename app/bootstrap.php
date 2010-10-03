@@ -32,7 +32,7 @@ if (Environment::getName() !== 'console') {
 		# AdminModule routes
 		$router[] = new Route('admin/<presenter>/<action>/<id>', array(
 			'module'	=> 'Admin',
-			'presenter'	=> 'Default',
+			'presenter'	=> 'Dashboard',
 			'action'	=> 'default',
 			'id'		=> null
 		));

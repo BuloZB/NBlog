@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Login :: NBlog administration</title>
+
+	<meta name="description" content="">
+
+	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
+	<link rel="stylesheet" href="{$basePath}/css/admin/auth.css?v=1" media="screen">
+</head>
+<body>
+
+	<header>
+		<h1><a href="{plink auth:login}">NBlog administration<span></span></a></h1>
+	</header>
+
+
+
+	<div id="main">
+		{foreach $flashes as $flash}<div class="flash {$flash->type}">{$flash->message}</div>{/foreach}
+		{include #content}
+	</div><!-- #main -->
+
+</body>
+</html>

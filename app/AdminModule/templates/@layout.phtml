@@ -1,32 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-	<title>Modules demo</title>
-	<link rel="stylesheet" type="text/css" media="screen" href="{$basePath}/css/site.css">
+	<meta charset="utf-8">
+	<title>{block #title}NBlog administration{/block}</title>
+
+	<meta name="description" content="">
+
+	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
+	<link rel="stylesheet" href="{$basePath}/css/admin/main.css?v=1" media="screen">
+	{block #styles}{/block}
 </head>
-
 <body>
-	<h1>Modules demo</h1>
+<div id="wrapper">
 
-	<div id="path">
-		<span id="module">{$moduleName}<span id="presenter">{$presenterName}:<span id="view">{$viewName}</span></span></span>
-	</div>
+	<header>
+		<h1><a href="{$baseUri}">NBlog<span></span></a></h1>
 
-	<fieldset>
-		<legend>This is layout template <code>{$template->getFile() |replace:$root}</code></legend>
-
-		<fieldset>
-			<legend>This is content block template <code>{$presenter->template->getFile() |replace:$root}</code></legend>
-			{include #content}
-		</fieldset>
+		<p id="userbox">
+			loggedin <strong>{$user->name}</strong> [{? echo implode(', ', $user->roles)}] |
+			<a href="{link Default:logout}">odhlásiť</a>
+		</p><!-- #userbox -->
+	</header>
 
 
-		<h2>Absolute links</h2>
-		<ul>
-			<li><a href="{link :Front:Default:}"><code>:Front:Default:</code></a> - link to presenter <code>Front:Default</code></li>
-			<li><a href="{link :Admin:Default:}"><code>:Admin:Default:</code></a> - link to presenter <code>Admin:Default</code></li>
-		</ul>
-	</fieldset>
+
+	<div id="main">
+		{include #content}
+	</div><!-- #main -->
+
+
+
+	<footer>
+		<p>Copyright &copy; Srigi, 2010</p>
+	</footer>
+
+</div><!-- #wrapper -->
+
+{snippet:flashes}
+	{if !empty($flashes)}
+		<div id="flashes">
+			{foreach $flashes as $flash}
+				<div class="flash {$flash->type}">{$flash->message}</div>
+			{/foreach}
+		</div>
+	{/if}
+{/snippet}
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script>!window.jQuery && document.write('<script src="{$basePath}/js/jquery-1.4.2.min.js"><\/script>')</script>
+<script src="{$basePath}/js/funcs.js"></script>
+{block #javascripts}{/block}
 </body>
 </html>
