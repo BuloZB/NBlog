@@ -1,5 +1,5 @@
 @import url("../reset.css?v=1");
-@import url(".t/ypography.css?v=1");
+@import url("../typography.css?v=1");
 
 
 body { background-color:#eaeaea; color:#444; font-family:sans-serif; font-size:85%; text-align:center; }
