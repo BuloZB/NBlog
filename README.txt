@@ -14,9 +14,26 @@ At this point NBlog can/supports:
 - listing of articles excerpts filtered by concrete tag
 - listing of full article with associated tags and comments
 - adding of new comments to the article (by AJAX!)
+- login/logout to/from administration
 
 
 Installation
 ============
 
-//TODO
+- Download source codes of NBlog, by cloning repository or as an archive.
+- Place files in DocumentRoot of your Apache webserver or create new virtualhost (recomended).
+- Make sure that folder `var` (and all subfolders) is writable by webserver (file permissions 777).
+- Copy Nette Framework 2 (nightly build) and Doctrine 2 (beta 4) libraries to `libs` folder.
+- Setup your DB connection in `app/config.ini`
+- Change default setting of so-called "salt" in `app/config.ini`, line 37 - fill another random string.
+- Create structure of database:
+  - by command line interface `doctrine-cli`:
+    - linux: `./scripts/doctrine orm:schema-tool:create`
+    - windows `php -f scripts/doctrine-cli.php orm:schema-tool:create`
+  - by running SQL script `resources/database/dump.sql` (run on already created database!)
+
+
+Note: Nette Framework 2-dev has bug - new snippets does not work. So it is needed to do small "hack".
+  Open file `libs/Nette/Templates/Filers/LatteFilter.php` and change line 137 to:
+
+list(, $macro, $value, $modifiers) = String::match($matches['macro'], '#^(/?[a-z0-9.]+)?(.*?)(\\|[a-z](?:'.Tokenizer::RE_STRING.'|[^\'"]+)*)?$()#is');
