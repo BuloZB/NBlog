@@ -11,21 +11,39 @@
 	{block #styles}{/block}
 </head>
 <body>
+<div id="whole">
 <div id="wrapper">
 
 	<header>
-		<h1><a href="{$baseUri}">NBlog<span></span></a></h1>
+		<h1><a href="{plink Dashboard:default}">NBlog<span></span></a></h1>
 
 		<p id="userbox">
-			loggedin <strong>{$user->getIdentity()->name}</strong> [{? echo implode(', ', $user->roles)}] |
-			<a href="{link Dashboard:logout}">odhlásiť</a>
+			logged in <a href="{plink Settings:default#user}">{$user->getIdentity()->name}</a> [{? echo implode(', ', $user->roles)}]
+			<a id="logout" href="{link Dashboard:logout}" title="logout">logout</a>
 		</p><!-- #userbox -->
 	</header>
 
 
 
 	<div id="main">
-		{include #content}
+		<div id="sidebar">
+		<div id="sidebarInner">
+			<nav>
+				<a href="{plink Posts:}">Posts</a>
+				<a href="{plink Comments:}">Comments</a>
+				<a href="{plink Media:}">Media</a>
+				<hr>
+				<a href="{plink Settings:}">Settings</a>
+			</nav>
+		</div><!-- #sidebarInner -->
+		</div><!-- #sidebar -->
+
+		<div id="content">
+		<div id="contentInner">
+			{include #content}
+		</div><!-- #contentInner -->
+		</div><!-- #content -->
+		<div class="clearfix"></div>
 	</div><!-- #main -->
 
 
@@ -35,6 +53,7 @@
 	</footer>
 
 </div><!-- #wrapper -->
+</div><!-- #whole -->
 
 {snippet:flashes}
 	{if !empty($flashes)}
@@ -46,8 +65,7 @@
 	{/if}
 {/snippet}
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-<script>!window.jQuery && document.write('<script src="{$basePath}/js/jquery-1.4.2.min.js"><\/script>')</script>
+<script src="{$basePath}/js/jquery-1.4.2.min.js"></script>
 <script src="{$basePath}/js/funcs.js"></script>
 {block #javascripts}{/block}
 </body>

@@ -1,3 +1,57 @@
 @import url("../reset.css?v=1");
 @import url("../typography.css?v=1");
 @import url("layout.css?v=1");
+
+
+body { background:url('../../images/admin/body.png') 0 0 repeat-x; }
+#whole { background:url('../../images/admin/body.png') 0 100% repeat-x; }
+
+/** HEADER **/
+header
+{ background-color:#353535; }
+
+	header h1 { display:inline-block; font-size:155%; height:60px; left:5px; position:absolute; top:9px; width:292px; }
+	header h1 a { display:block; height:100%; overflow:hidden; position:relative; width:100%; }
+	header h1 a:focus { outline:medium dotted #607890; }
+	header h1 a span { background:url('../../images/admin/homelink.png') 0 0 no-repeat; cursor:pointer; position:absolute; left:0; top:0; height:100%; width:100%; z-index:10; }
+
+	header #userbox
+	{ color:#aaa; float:right; margin:31px 0 0; }
+
+		header #userbox strong
+		{ color:#eee; }
+
+		header #userbox a
+		{ color:#eee; font-weight:bold; }
+
+		header #userbox a:hover
+		{ color:#fff; }
+
+		header #userbox a#logout
+		{ background:url('../../images/admin/logout.png') 0 0 no-repeat; display:block; float:right; height:30px; margin:-0.35em 0 0 1em; text-indent:-9999em; width:34px; }
+
+		header #userbox a#logout:hover
+		{ background-position:0 -30px; }
+
+
+/** MAIN **/
+#main { }
+
+	#sidebar {  }
+
+		#sidebar nav {  }
+			#sidebar nav a { display:block; }
+			#sidebar nav hr { display:block; }
+
+		#content { }
+			.dashboardBox {
+				-moz-border-radius:8px 8px 8px 8px;
+				background-color:#eee; border:2px solid #aaa; float:left; margin:0 16px 16px 0; padding:1em; min-height:200px; width:330px;
+			}
+			.dashboardBox.full {
+				margin:0 0 16px; width:706px;
+			}
+
+/** FOOTER **/
+footer
+{ background-color:#353535; clear:both; color:#ccc; font-size:85%; font-weight:bold;  line-height:80px; text-align:center; }

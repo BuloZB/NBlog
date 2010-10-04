@@ -5,7 +5,7 @@ namespace AdminModule;
 use	Nette\Web\User;
 
 
-final class SecuredPresenter extends BasePresenter
+abstract class SecuredPresenter extends BasePresenter
 {
 
 	public function startup()

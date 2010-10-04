@@ -1,2 +1,22 @@
 #wrapper
-{ margin:10px auto; width:960px; }
+{ margin:0 auto; width:960px; }
+
+
+/** HEADER **/
+header
+{ height:80px; margin:0 0 1em; position:relative; }
+
+
+/** MAIN **/
+#main { text-align:left; margin:0 0 2em;}
+
+	#sidebar { float:left; width:180px; }
+		#sidebarInner { margin:1em; }
+
+	#content { float:right; width:780px; }
+		#contentInner { margin:1em; }
+
+
+/** FOOTER **/
+footer
+{ clear:both; height:80px; }
