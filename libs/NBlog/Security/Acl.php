@@ -16,8 +16,8 @@ class Acl extends Permission
 
 		// resources
 		$this->addResource('Admin:Dashboard');
-		$this->addResource('Admin:Post');
-		$this->addResource('Admin:Comment');
+		$this->addResource('Admin:Posts');
+		$this->addResource('Admin:Comments');
 		$this->addResource('Admin:Media');
 		$this->addResource('Admin:Settings');
 
