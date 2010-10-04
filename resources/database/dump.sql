@@ -81,7 +81,7 @@ CREATE TABLE `User` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `User` (`id`, `name`, `email`, `password`, `role`) VALUES
-(NULL, 'Srigi', 'srigi@srigi.sk', 'ffb1e31b0a88656ad617a6e4fe8fa3ec291259c8', 'admin');
+(NULL, 'Srigi', 'demo@phpq.info', 'dcc1e12b13ab27f79f66a4b52347beae84a7175c', 'admin');
 
 
 
