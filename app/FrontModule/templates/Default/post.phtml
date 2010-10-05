@@ -73,7 +73,6 @@
 
 		{snippet:commentForm}
 			{control commentForm begin}
-
 				{var form => $control['commentForm']}
 
 				{if !$form->hasErrors()}
@@ -84,43 +83,64 @@
 
 				<span class="error bottom" n:foreach="$form[Nette\Forms\Form::PROTECTOR_ID]->errors as $error">{$error}</span>
 
-				{*if is_user_logged_in()*}
+				<table>
+					{*if is_user_logged_in()*}
 
-						<!--
-						<p>Logged in as <a href="profile.php">{*$user_identity*}</a>.
-						<a href="logout" title="Log out of this account">Log out &raquo;</a></p>
-						-->
+							<!--
+							<p>Logged in as <a href="profile.php">{*$user_identity*}</a>.
+							<a href="logout" title="Log out of this account">Log out &raquo;</a></p>
+							-->
 
-				{*else*}
+					{*else*}
 
-					<p>
-						{$form['author']->control}
-						{$form['author']->label}
-						<span class="error" n:foreach="$form['author']->errors as $error">{$error}</span>
-					</p>
+						<tr>
+							<td class="c1">{$form['author']->control}</td>
+							<td colspan="2">
+								{$form['author']->label}
+								<span class="error" n:foreach="$form['author']->errors as $error">{$error}</span>
+							</td>
+						</tr>
 
-					<p>
-						{$form['authorEmail']->control}
-						{$form['authorEmail']->label}
-						<span class="error" n:foreach="$form['authorEmail']->errors as $error">{$error}</span>
-					</p>
+						<tr>
+							<td class="c1">{$form['authorEmail']->control}</td>
+							<td colspan="2">
+								{$form['authorEmail']->label}
+								<span class="error" n:foreach="$form['authorEmail']->errors as $error">{$error}</span>
+							</td>
+						</tr>
 
-					<p>
-						{$form['authorUrl']->control}
-						{$form['authorUrl']->label}
-						<span class="error" n:foreach="$form['authorUrl']->errors as $error">{$error}</span>
-					</p>
+						<tr>
+							<td class="c1">{$form['authorUrl']->control}</td>
+							<td colspan="2">
+								{$form['authorUrl']->label}
+								<span class="error" n:foreach="$form['authorUrl']->errors as $error">{$error}</span>
+							</td>
+						</tr>
 
-				{*/if*}
+					{*/if*}
 
-				<p>
-					{$form['comment']->control}
-					{$form['comment']->label}
-					<span class="error" n:foreach="$form['comment']->errors as $error">{$error}</span>
-				</p>
+						<tr>
+							<td class="commentWrapp" rowspan="2" colspan="2">{$form['comment']->control}</td>
+							<td class="commentMsgs">
+								{$form['comment']->label}
+								<span class="error" n:foreach="$form['comment']->errors as $error">{$error}</span>
+							</td>
+						</tr>
 
-				<p>{$form['send']->control}</p>
+						<tr>
+							<td class="commentHint">
+								You can format your comment using Texy! Example of syntax:<br><br>
+								"link text":link<br>
+								<strong>**bold**</strong><br>
+								<em>*italic*</em><br>
+								<code>`code`</code>
+							</td>
+						</tr>
 
+						<tr>
+							<td colspan="3">{$form['send']->control}</td><td>&nbsp;</td><td>&nbsp;</td>
+						</tr>
+				</table>
 			{control commentForm end}
 		{/snippet}
 

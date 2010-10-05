@@ -56,13 +56,14 @@ sup
 { vertical-align:super; font-size:smaller; }
 
 pre
-{ padding:15px;
+{
+	background-color:#fafafa; border:1px solid #ccc; color:#222; font-size:85%; line-height:1.44824; margin:0 1em 1.44824em; padding:1.44824em;
 
-  /* www.pathf.com/blogs/2008/05/formatting-quoted-code-in-blog-posts-css21-white-space-pre-wrap/ */
-  white-space: pre; /* CSS2 */
-  white-space: pre-wrap; /* CSS 2.1 */
-  white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
-  word-wrap: break-word; /* IE */
+	/* www.pathf.com/blogs/2008/05/formatting-quoted-code-in-blog-posts-css21-white-space-pre-wrap/ */
+	white-space: pre; /* CSS2 */
+	white-space: pre-wrap; /* CSS 2.1 */
+	white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
+	word-wrap: break-word; /* IE */
 }
 
 
@@ -128,7 +129,7 @@ form h3.error
 form span.error {
 	-moz-border-radius:8px; -o-border-radius:8px; -webkit-border-radius:8px; border-radius:8px;
 	-moz-box-shadow:2px 1px 3px rgba(0, 0, 0, 0.5);
-	background:#3389cf url("../images/ico_error_16.png") 1px 50% no-repeat; color:#ddd; display:inline-block; font-size:85%; height:18px; line-height:18px; margin:0 0 0 5px; padding:0 8px 0 20px;
+	background:#3389cf url("../images/ico_error_16.png") 1px 50% no-repeat; color:#ddd; display:inline-block; font-size:85%; height:18px; line-height:18px; margin:0 0 7px 5px; padding:0 8px 0 20px;
 }
 
 form span.error.bottom

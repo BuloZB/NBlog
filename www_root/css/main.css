@@ -61,8 +61,18 @@ header { background-color:#eaeaea; height:100px; margin:0 0 10px; position:relat
 			#commentlist .commentAuthor { float:left; font-weight:bold; margin:0 0 0.5em; }
 			#commentlist .commentDate { clear:left; color:#888; float:left; font-size:75%; margin:0 0 0 0.5em; }
 		#commentlist .commentBody {}
+			#commentlist .commentBody li { margin:0; }
 
 	#comments form { clear:both; position:relative; }
+		#comments form table { clear:both; }
+			#comments form table td { padding:0.25em; vertical-align:baseline; }
+			#comments form table td.c1 { width:15em; }
+			#comments form table td.commentWrapp { vertical-align:top; }
+			#comments form table td.commentMsgs { height:58px; vertical-align:top; }
+			#comments form table td.commentHint { font-size:85%; line-height:1.5; padding-right:18em; vertical-align:top; }
+				#comments form table td input[type="text"] { width:15em; }
+				#comments form table td textarea {  }
+
 		#commentFormHide { background-color:#eaeaea; height:100%; left:0; position:absolute; top:0; width:100%; }
 
 	#comments p { clear:both; }
