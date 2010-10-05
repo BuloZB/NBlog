@@ -15,6 +15,7 @@ At this point NBlog can/supports:
 - listing of full article with associated tags and comments
 - adding of new comments to the article (by AJAX!)
 - login/logout to/from administration
+- Texy! processing of articles and comments
 
 
 Installation
@@ -25,7 +26,7 @@ Installation
 - Make sure that folder `var` (and all subfolders) is writable by webserver (file permissions 777).
 - Copy Nette Framework 2 (nightly build) and Doctrine 2 (beta 4) libraries to `libs` folder.
 - Setup your DB connection in `app/config.ini`
-- Change default setting of so-called "salt" in `app/config.ini`, line 37 - fill another random string.
+- Change default setting (fill another random string) of so-called "salt" in `app/config.ini`, in all sections.
 - Create structure of database:
   - by command line interface `doctrine-cli`:
     - linux: `./scripts/doctrine orm:schema-tool:create`

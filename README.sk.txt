@@ -15,6 +15,7 @@ Momenálne podporuje/funguje:
 - výpis plného článku aj s tagmi a komentármi
 - pridávanie komentárov k článku (AJAXovo!)
 - prihlásenie/odhlásenie do/z administrácie
+- Texy! processing článkov a komentárov
 
 
 Inštalácia
@@ -25,7 +26,7 @@ Inštalácia
 - Zložke `var` (a všetkým jej podzložkám) nastavte práva na 777.
 - Nakopírujte do zložky `libs` knižnice Nette Framework 2 (nightly build)  a Doctrine 2 (beta 4).
 - Nastavte databázové pripojenie v súbore `app/config.ini`
-- Zmeňte defaultné nastavenie tzv. "soli" v `app/config.ini`, riadok 37 - vyplňte INÝ náhodný reťazec.
+- Zmeňte defaultné nastavenie (vyplňte INÝ náhodný reťazec) tzv. "soli" v `app/config.ini` vo všetkých sekciách.
 - Vytvorte štruktúru databázy:
   - pomocou konzolového rozhrania `doctrine-cli`:
     - linux: `./scripts/doctrine orm:schema-tool:create`
