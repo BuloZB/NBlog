@@ -12,7 +12,7 @@
 				<p class="comments-link"><a href="{plink Default:post 'slug'=>$post->slug}#comments">{$post->commentsCount}</a></p>
 
 				<div class="entry-content">
-					{!$post->text|perex}
+					{!$post->text|perex|texy}
 				</div><!-- .entry-content -->
 			</div><!-- .post -->
 		{/foreach}

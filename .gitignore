@@ -1,7 +1,8 @@
 nbproject
 perm.sh
-libs/Nette/*
 libs/Doctrine/*
+libs/Nette/*
+libs/texy/*
 var/proxies/*
 var/sessions/*
 var/temp/*

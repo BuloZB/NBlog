@@ -65,6 +65,28 @@ pre
   word-wrap: break-word; /* IE */
 }
 
+
+/** QUOTATION **/
+q, blockquote
+{color:#333; font-family:sans-serif; quotes:"“" "”" "‘" "’";}
+
+blockquote {
+	-moz-border-radius:10px; -o-border-radius:10px; -webkit-border-radius:10px; border-radius:10px;
+	-moz-box-shadow:0 -1px 10px rgba(0, 0, 0, 0.15); -webkit-box-shadow:0 -1px 10px rgba(0, 0, 0, 0.15);
+	background-color:#ffefef; border:1px solid #ccc; margin:0 1em 1.25em; padding:1.5em 2.25em 0;
+}
+
+blockquote:before, blockquote:after
+{color:#6b9fbf; font-family:Georgia, 'New York CE', utopia, serif; font-size:250%; font-weight:bold;}
+
+q:before, blockquote:before
+{content:open-quote; padding:0;}
+
+q:after, blockquote:after
+{content:close-quote; padding:0; vertical-align:text-bottom;}
+
+
+/** FORMS **/
 textarea
 { overflow:auto; }
 
@@ -115,22 +137,21 @@ form span.error.bottom
 form .spinner
 { background:url('../images/ico_spinner_16.gif') 0 0 no-repeat; display:inline-block; height:16px; margin:0 0 -5px 10px; width:16px; }
 
+/* make buttons play nice in IE */
+button
+{ overflow:visible; width:auto; }
+
+
+/* bicubic resizing for non-native sized IMG */
+.ie7 img
+{ -ms-interpolation-mode: bicubic; }
+
 
 ::-moz-selection
 { background:#ff5e99; color:#fff; text-shadow:none; }
 
 ::selection
 { background:#ff5e99; color:#fff; text-shadow:none; }
-
-
-/* make buttons play nice in IE */
-button
-{ overflow:visible; width:auto; }
-
-/* bicubic resizing for non-native sized IMG */
-.ie7 img
-{ -ms-interpolation-mode: bicubic; }
-
 
 
 /*
