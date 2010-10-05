@@ -15,10 +15,10 @@
 <div id="wrapper">
 
 	<header>
-		<h1><a href="{plink Dashboard:default}">NBlog<span></span></a></h1>
+		<h1><a href="{plink Dashboard:}">NBlog<span></span></a></h1>
 
 		<p id="userbox">
-			logged in <a href="{plink Settings:default#user}">{$user->getIdentity()->name}</a> [{? echo implode(', ', $user->roles)}]
+			logged in <a href="{plink Settings:#user}">{$user->identity->name}</a> [{? echo implode(', ', $user->roles)}]
 			<a id="logout" href="{link Dashboard:logout}" title="logout">logout</a>
 		</p><!-- #userbox -->
 	</header>

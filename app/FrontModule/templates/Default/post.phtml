@@ -10,20 +10,20 @@
 <div id="posts">
 
 	<div class="post single">
-		<h2 class="entry-title"><a href="{plink Default:post 'slug'=>$post->getSlug()}">{$post->getHeadline()}</a></h2>
-		<p class="entry-date">{$post->getCreated()->format('M j, Y')}</p>
+		<h2 class="entry-title"><a href="{plink Default:post 'slug'=>$post->slug}">{$post->headline}</a></h2>
+		<p class="entry-date">{$post->created->format('M j, Y')}</p>
 		{snippet:commentsLink}
-			<p class="comments-link"><a href="{plink Default:post 'slug'=>$post->getSlug()}#comments">{=count($comments)}</a></p>
+			<p class="comments-link"><a href="{plink Default:post 'slug'=>$post->slug}#comments">{=count($comments)}</a></p>
 		{/snippet}
 
 		<div class="entry-content">
-			{!$post->getText()}
+			{!$post->text}
 		</div><!-- .entry-content -->
 
 		<p class="tag-links">
 			<span>tagy: </span>
-			{foreach $post->getTags() as $tag}
-				<a href="{plink Default:tag 'tag'=>$tag->getName()}">{$tag->getName()}</a>
+			{foreach $post->tags as $tag}
+				<a href="{plink Default:tag 'tag'=>$tag->name}">{$tag->name}</a>
 				{if !$iterator->isLast()}|{/if}
 			{/foreach}
 		</p>
@@ -43,21 +43,21 @@
 
 				<ol id="commentlist">
 					{foreach $comments as $comment}
-						<li id="comment-{$comment->getId()}">
+						<li id="comment-{$comment->id}">
 							<div class="commentHead">
-								<a class="commentPermalink" href="#comment-{$comment->getId()}">#{$iterator->getCounter()}</a>
+								<a class="commentPermalink" href="#comment-{$comment->id}">#{$iterator->getCounter()}</a>
 								<div class="commentAuthor">
-									{if $comment->getAuthorUrl()}
-										<a href="http://{$comment->getAuthorUrl()}">{$comment->getAuthor()}</a>
+									{if $comment->authorUrl}
+										<a href="http://{$comment->authorUrl}">{$comment->author}</a>
 									{else}
-										{$comment->getAuthor()}
+										{$comment->author}
 									{/if}
 								</div>
-								<p class="commentDate">{$comment->getCreated()->format('M j, Y, H:i')}</p>
+								<p class="commentDate">{$comment->created->format('M j, Y, H:i')}</p>
 							</div>
 
 							<div class="commentBody">
-								{!$comment->getText()}
+								{!$comment->text}
 							</div>
 						</li><!-- comment -->
 					{/foreach}

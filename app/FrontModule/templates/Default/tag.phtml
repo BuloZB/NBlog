@@ -3,17 +3,23 @@
 <h2 class="section">Tag &bdquo;{$tagName}&ldquo;</h2>
 
 <div id="posts">
-	{foreach $posts as $post}
+	{if !empty($posts)}
 
-		<div class="post">
-			<h3 class="entry-title"><a href="{plink Default:post 'slug'=>$post->getSlug()}">{$post->getHeadline()}</a></h3>
-			<p class="entry-date">{$post->getCreated()->format('M j, Y')}</p>
-			<p class="comments-link"><a href="{plink Default:post 'slug'=>$post->getSlug()}#comments">{$post->getCommentsCount()}</a></p>
+		{foreach $posts as $post}
+			<div class="post">
+				<h3 class="entry-title"><a href="{plink Default:post 'slug'=>$post->slug}">{$post->headline}</a></h3>
+				<p class="entry-date">{$post->created->format('M j, Y')}</p>
+				<p class="comments-link"><a href="{plink Default:post 'slug'=>$post->slug}#comments">{$post->commentsCount}</a></p>
 
-			<div class="entry-content">
-				{!$post->getText()|perex}
-			</div><!-- .entry-content -->
-		</div><!-- .post -->
+				<div class="entry-content">
+					{!$post->text|perex}
+				</div><!-- .entry-content -->
+			</div><!-- .post -->
+		{/foreach}
 
-	{/foreach}
+	{else}
+
+		<p>No Posts!</p>
+
+	{/if}
 </div><!-- #posts -->

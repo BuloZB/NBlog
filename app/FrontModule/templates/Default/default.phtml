@@ -4,25 +4,23 @@
 	{if !empty($posts)}
 
 		{foreach $posts as $post}
-
 			<div class="post">
-				<h2 class="entry-title"><a href="{plink Default:post 'slug'=>$post->getSlug()}">{$post->getHeadline()}</a></h2>
-				<p class="entry-date">{$post->getCreated()->format('M j, Y')}</p>
-				<p class="comments-link"><a href="{plink Default:post 'slug'=>$post->getSlug()}#comments" title="comments">{$post->getCommentsCount()}</a></p>
+				<h2 class="entry-title"><a href="{plink Default:post 'slug'=>$post->slug}">{$post->headline}</a></h2>
+				<p class="entry-date">{$post->created->format('M j, Y')}</p>
+				<p class="comments-link"><a href="{plink Default:post 'slug'=>$post->slug}#comments" title="comments">{$post->commentsCount}</a></p>
 
 				<div class="entry-content">
-					{!$post->getText()|perex}
+					{!$post->text|perex}
 				</div><!-- .entry-content -->
 
 				<p class="tag-links">
 					<span>tags: </span>
-					{foreach $post->getTags() as $tag}
-						<a href="{plink Default:tag 'tag'=>$tag->getName()}">{$tag->getName()}</a>
+					{foreach $post->tags as $tag}
+						<a href="{plink Default:tag 'tag'=>$tag->name}">{$tag->name}</a>
 						{if !$iterator->isLast()}|{/if}
 					{/foreach}
 				</p>
 			</div><!-- .post -->
-
 		{/foreach}
 
 	{else}
