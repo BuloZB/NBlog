@@ -16,11 +16,21 @@
 	</header>
 
 
-
 	<div id="main">
-		{foreach $flashes as $flash}<div class="flash {$flash->type}">{$flash->message}</div>{/foreach}
 		{include #content}
 	</div><!-- #main -->
 
+
+	{if !empty($flashes)}
+		<div id="flashes">
+			{foreach $flashes as $flash}
+				<div class="flash {$flash->type}">{$flash->message}</div>
+			{/foreach}
+		</div>
+	{/if}
+
+<script src="{$basePath}/js/jquery-1.4.2.min.js"></script>
+<script src="{$basePath}/js/funcs.js"></script>
+<script>$(function(){ $('#flashes').center().fadeIn(1000).delay(2500).fadeOut(1000); });</script>
 </body>
 </html>
