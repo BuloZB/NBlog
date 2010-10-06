@@ -2,7 +2,10 @@
 
 namespace AdminModule;
 
-use	Nette\Web\User;
+use	Nette\Web\User,
+	NBlog\ORM\Services\CommentService,
+	NBlog\ORM\Services\PostService,
+	AdminModule\Forms\QuickPostForm;
 
 
 final class DashboardPresenter extends BasePresenter
@@ -29,11 +32,32 @@ final class DashboardPresenter extends BasePresenter
 	}
 
 
+	public function renderDefault()
+	{
+		$postService	= new PostService();
+		$commentService	= new CommentService();
+
+		$statistics['posts']['numAll']				= $postService->countAll();
+		$statistics['posts']['numDrafts']			= $postService->countDrafts();
+		$statistics['comments']['numAll']			= $commentService->countAll();
+		$statistics['comments']['numNotApproved']	= $commentService->countNotApproved();
+
+		$this->template->statistics		= $statistics;
+		$this->template->recentComments	= $recentComments;
+	}
+
+
 	public function actionLogout()
 	{
 		$this->getUser()->logout();
 		$this->flashMessage('You have logged out of administration.', 'info');
 		$this->redirect('Auth:login');
+	}
+
+
+	protected function createComponentQuickPostForm($name)
+	{
+		$form = new QuickPostForm($this, $name);
 	}
 
 }

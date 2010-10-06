@@ -23,6 +23,31 @@ class PostService extends BaseService
 	// </editor-fold>
 
 
+	public function countAll()
+	{
+		$result = $this->dbm->createQueryBuilder()
+			->select('count(p.id) c')
+			->from('\NBlog\Entities\Post', 'p')
+			->getQuery()
+			->getSingleResult();
+
+		return $result['c'];
+	}
+
+
+	public function countDrafts()
+	{
+		$result = $this->dbm->createQueryBuilder()
+			->select('count(p.id) c')
+			->from('\NBlog\Entities\Post', 'p')
+			->where("p.status = 'draft'")
+			->getQuery()
+			->getSingleResult();
+
+		return $result['c'];
+	}
+
+
 	public function getPublishedPosts($page = 1)
 	{
 		$result = $this->dbm->createQueryBuilder()

@@ -9,6 +9,31 @@ use	NBlog\Entities\Comment,
 class CommentService extends BaseService
 {
 
+	public function countAll()
+	{
+		$result = $this->dbm->createQueryBuilder()
+			->select('count(c.id) i')
+			->from('\NBlog\Entities\Comment', 'c')
+			->getQuery()
+			->getSingleResult();
+
+		return $result['i'];
+	}
+
+
+	public function countNotApproved()
+	{
+		$result = $this->dbm->createQueryBuilder()
+			->select('count(c.id) i')
+			->from('\NBlog\Entities\Comment', 'c')
+			->where("c.approved != true")
+			->getQuery()
+			->getSingleResult();
+
+		return $result['i'];
+	}
+
+
 	public function getBySlug($slug)
 	{
 		$result = $this->dbm->createQueryBuilder()

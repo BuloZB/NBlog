@@ -45,12 +45,51 @@ header
 
 		#content { }
 			.dashboardBox {
-				-moz-border-radius:8px 8px 8px 8px;
-				background-color:#eee; border:2px solid #aaa; float:left; margin:0 16px 16px 0; padding:1em; min-height:200px; width:330px;
+				-moz-border-radius:8px;
+				background-color:#eee; border:2px solid #aaa; float:left; margin:0 16px 16px 0; min-height:200px; width:350px;
 			}
 			.dashboardBox.full {
-				margin:0 0 16px; width:706px;
+				margin:0 0 16px; width:720px;
 			}
+				.dashboardBox h4 {
+					-moz-border-radius:5px 5px 0 0;
+					background-color:#bebebe; color:#f4f4f4; line-height:2; padding:0 0 0 1em;
+				}
+				.dashboardBox table
+				{ margin:0 auto 1em; width:95%; }
+					.dashboardBox table th, .dashboardBox table td
+					{ padding: 0.25em; }
+					.dashboardBox .notPublicNum
+					{ width:5em; }
+					.dashboardBox .notPublicNum span {
+						-moz-border-radius:5px; -o-border-radius:5px; -webkit-border-radius:5px; border-radius:5px;
+						background-color:#777; color:#eee; font-size:75%; padding:0.15em 0.5em;
+					}
+
+					/** Dashboard stats **/
+					#dashStats th, #dashStats td
+					{ border-bottom:1px solid #c0c0c0; }
+					#dashStats th
+					{ text-align:left; }
+					#dashStats td
+					{ text-align:right; }
+
+					/** Quickpost **/
+					#quickpost ul.error
+					{ margin:0; }
+						#quickpost ul.error li {
+							-moz-border-radius:8px; -o-border-radius:8px; -webkit-border-radius:8px; border-radius:8px;
+							-moz-box-shadow:2px 1px 3px rgba(0, 0, 0, 0.5);
+							background:#3389cf url("../../images/ico_error_16.png") 1px 50% no-repeat; color:#ddd; display:inline-block; font-size:85%; height:18px; line-height:18px; margin:0 0 7px 5px; padding:0 8px 0 20px;
+						}
+					#quickpost th
+					{ width:3em; }
+					#quickpost input[type="text"]
+					{ width:99.5%; }
+					#quickpost textarea
+					{ width:99.5%; }
+					#quickpost .submit
+					{ padding-right:0; text-align:right; }
 
 /** FOOTER **/
 footer
